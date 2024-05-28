@@ -1,0 +1,12 @@
+data
+data/*
+
+results
+results/*
+
+.vscode
+.vscode/*
+
+
+__pycache__/
+__pycache__/*
