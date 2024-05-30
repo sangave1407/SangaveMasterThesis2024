@@ -1,5 +1,5 @@
 import torch
-
+from tqdm import tqdm 
 
 class Trainer():
     def __init__(self, model, optimizer, criterion, device, result_path):
@@ -18,7 +18,8 @@ class Trainer():
     def train(self, train_loader, epoch):
         self.model.train()
         running_loss = 0.0
-        for idx, (data, labels) in enumerate(train_loader):
+        print(f"Running training for epoch {epoch}")
+        for idx, (data, labels) in tqdm(enumerate(train_loader)):
             data, labels = data.to(self.device), labels.to(self.device)
             self.optimizer.zero_grad()
             outputs = self.model(data)
@@ -26,7 +27,7 @@ class Trainer():
             loss.backward()
             self.optimizer.step()
             running_loss += loss.item()
-            if idx % 1 == 1:
+            if idx % 5 == 4:
                 print("Epoch:", epoch + 1, "Batch:",
                       idx + 1, "Loss:", running_loss / 100)
                 running_loss = 0.0
@@ -34,8 +35,9 @@ class Trainer():
     def validate(self, val_loader, epoch):
         self.model.eval()
         running_loss = 0.0
+        print(f"Running validation for epoch {epoch}")
         with torch.no_grad():
-            for idx, (data, labels) in enumerate(val_loader):
+            for idx, (data, labels) in tqdm(enumerate(val_loader)):
                 data, labels = data.to(self.device), labels.to(self.device)
                 outputs = self.model(data)
                 loss = self.criterion(outputs, labels)
