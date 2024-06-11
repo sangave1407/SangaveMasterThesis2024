@@ -12,7 +12,7 @@ def main():
     """
     data_path = "/work/projects/heart_project/OSA_MW/all_files_ahi_sleep_complete_apneas/DATA"
     result_path = "results"
-    split_folder = "/work/projects/heart_project/OSA_MW/splits/split1"
+    split_folder = "/work/projects/heart_project/OSA_MW/split"
     channels = ["x2", "x3", "x4", "x5"]
     labels = ["y"]
     window_size = 2*60*60*64  # 2 hours of data
